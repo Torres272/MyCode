@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="regression-test-SPARK-8489">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../21Spark/2.资料/02_jar包/spark-2.1.1/sql/hive/src/test/resources/regression-test-SPARK-8489/test-2.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../21Spark/2.资料/02_jar包/spark-2.1.1/sql/hive/src/test/resources/regression-test-SPARK-8489/test-2.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

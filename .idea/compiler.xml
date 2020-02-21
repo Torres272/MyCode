@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="redis" />
+        <module name="dw-publisher" />
+        <module name="sparkcore" />
+        <module name="sparksql" />
+        <module name="kafka10" />
+        <module name="kafka" />
+        <module name="dw-common" />
+        <module name="dw-realtime" />
+        <module name="dw-mocker" />
+        <module name="sparkproject" />
+        <module name="kafka08" />
+        <module name="dw-logger" />
+        <module name="dw-chart" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dw-common" options="-parameters" />
+      <module name="dw-logger" options="-parameters" />
+      <module name="dw-mocker" options="-parameters" />
+      <module name="dw-publisher" options="" />
+      <module name="dw-realtime" options="-parameters" />
+      <module name="kafka" options="" />
+      <module name="kafka08" options="" />
+      <module name="kafka10" options="" />
+      <module name="redis" options="" />
+      <module name="sparkcore" options="" />
+      <module name="sparkproject" options="" />
+      <module name="sparksql" options="" />
+    </option>
+  </component>
+</project>

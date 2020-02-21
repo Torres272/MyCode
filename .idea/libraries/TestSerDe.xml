@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="TestSerDe">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../21Spark/2.资料/02_jar包/spark-2.1.1/sql/hive/src/test/resources/data/files/TestSerDe.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
