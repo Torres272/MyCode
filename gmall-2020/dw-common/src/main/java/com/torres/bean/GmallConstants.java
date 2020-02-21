@@ -12,4 +12,5 @@ public class GmallConstants {
     public static final String ES_INDEX_NEW_ORDER="gmall2019_new_order";
     public static final String ES_INDEX_SALE_DETAIL="gmall2019_sale_detail";
 
+    public static final String GMALL_ORDER_INFO_TOPIC = "gmall_order_info";
 }

@@ -2,6 +2,7 @@ package com.torres.dwpublisher.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.torres.dwpublisher.service.DauService;
+import com.torres.dwpublisher.service.GmvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +18,13 @@ public class PublisherController {
     @Autowired
     DauService dauService;
 
+    @Autowired
+    GmvService gmvService;
+
     @GetMapping("realtime-total")
     public String getRealTimeTotal(@RequestParam("date") String date){
         int total = dauService.getTotal(date);
+        Double amount = gmvService.getTotal(date);
 
         ArrayList<Map> result = new ArrayList<>();
 
@@ -33,6 +38,13 @@ public class PublisherController {
         newMidMap.put("name", "新增设备");
         newMidMap.put("value", "2333");
 
+
+        HashMap<String, Object> gmvMap = new HashMap<>();
+        newMidMap.put("id", "order_amount");
+        newMidMap.put("name", "新增交易额");
+        newMidMap.put("value", amount);
+
+
         result.add(dauMap);
         result.add(newMidMap);
 
@@ -41,30 +53,42 @@ public class PublisherController {
 
     @GetMapping("realtime-hours")
     public String getRealTimeHours(@RequestParam("id") String id,@RequestParam("date") String date){
+        //创建集合用户存放查询结果
         HashMap<String, Map> result = new HashMap<>();
+        String yesterday = getYesterday(date);
+        Map todayMap = null;
+        Map yesterdayMap = null;
 
-        Map todayMap = dauService.getRealTimeHours(date);
+        if ("dau".equals(id)) {
+            //查询当天数据 date:2020-02-19
+            todayMap = dauService.getRealTimeHours(date);
+            //查询昨日数据 date:2020-02-18
+            yesterdayMap = dauService.getRealTimeHours(yesterday);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Calendar instance = Calendar.getInstance();
-
-        try {
-            instance.setTime(sdf.parse(date));
-        }catch (ParseException e){
-            e.printStackTrace();
+        } else if ("order_amount".equals(id)) {
+            todayMap = gmvService.getHoursGmv(date);
+            yesterdayMap = gmvService.getHoursGmv(yesterday);
         }
 
-        instance.add(Calendar.DAY_OF_MONTH, -1);
-
-        String yesterday = sdf.format(new Date(instance.getTimeInMillis()));
-
-        Map yesterdayMap = dauService.getRealTimeHours(yesterday);
-
+        //将今天的以及昨天的数据存放至result
         result.put("yesterday", yesterdayMap);
         result.put("today", todayMap);
 
+        //将集合转换为字符串返回
         return JSON.toJSONString(result);
     }
 
+    private static String getYesterday(String date) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar instance = Calendar.getInstance();
+        try {
+            instance.setTime(sdf.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //将当天时间减一
+        instance.add(Calendar.DAY_OF_MONTH, -1);
+        //2020-02-18
+        return sdf.format(new Date(instance.getTimeInMillis()));
+    }
 }
