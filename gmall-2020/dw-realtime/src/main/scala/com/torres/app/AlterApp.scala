@@ -56,10 +56,12 @@ object AlterApp {
         list.foreach(item => {
           events.add(item.evid)
           if ("clickItem".equals(item.evid)) {
+           // println(item.evid)
             flag = false
             break();
 
-          } else if ("coupon".equals(item.uid)) {
+          } else if ("coupon".equals(item.evid)) {
+            //println(item.evid)
             uids.add(item.uid)
             itemIds.add(item.itemid)
           }

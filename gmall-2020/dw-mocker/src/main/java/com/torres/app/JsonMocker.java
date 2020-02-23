@@ -32,7 +32,7 @@ public class JsonMocker {
     };
     private RandomOptionGroup<String> areaOptionGroup = new RandomOptionGroup(areaOpts);
 
-    private String appId = "gmall2019";
+    private String appId = "gmall190826";
 
     private RanOpt[] vsOpts = {new RanOpt("1.2.0", 50), new RanOpt("1.1.2", 15),
             new RanOpt("1.1.3", 30),
@@ -41,7 +41,7 @@ public class JsonMocker {
 
     private RandomOptionGroup<String> vsOptionGroup = new RandomOptionGroup(vsOpts);
 
-    private RanOpt[] eventOpts = {new RanOpt("addFavor", 10), new RanOpt("addComment", 30), new RanOpt("addCart", 20), new RanOpt("clickItem", 40), new RanOpt("coupon", 45)};
+    private RanOpt[] eventOpts = {new RanOpt("addFavor", 1), new RanOpt("addComment", 3), new RanOpt("addCart", 2), new RanOpt("clickItem", 4), new RanOpt("coupon", 95)};
 
     private RandomOptionGroup<String> eventOptionGroup = new RandomOptionGroup(eventOpts);
 
@@ -119,7 +119,7 @@ public class JsonMocker {
              `ts` bigint COMMENT '启动时间', ,
              `area` string COMMENT '城市' */
 
-        String mid = "mid_" + RandomNum.getRandInt(1, 600);
+        String mid = "mid_" + RandomNum.getRandInt(1, 50);
         String uid = "" + RandomNum.getRandInt(1, 500);
         String os = osOptionGroup.getRandomOpt().getValue();
         String appid = this.appId;
