@@ -31,6 +31,7 @@
         <module>dw-realtime</module>
         <module>dw-chart</module>
         <module>dw-canal</module>
+        <module>dw-es</module>
     </modules>
 
     <properties>
@@ -71,6 +72,12 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>${log4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.searchbox</groupId>
+            <artifactId>jest</artifactId>
+            <version>6.3.1</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
