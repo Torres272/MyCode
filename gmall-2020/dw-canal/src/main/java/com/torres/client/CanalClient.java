@@ -10,6 +10,7 @@ import com.torres.bean.GmallConstants;
 import com.torres.utils.KafkaSender;
 
 import java.net.InetSocketAddress;
+import java.util.Random;
 
 public class CanalClient {
     public static void main(String[] args) throws InvalidProtocolBufferException {
@@ -49,20 +50,29 @@ public class CanalClient {
 
     private static void handler(String tableName, CanalEntry.EventType eventType, CanalEntry.RowChange rowChange) {
         if ("order_info".equals(tableName) && CanalEntry.EventType.INSERT.equals(eventType)) {
-            for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
+            sendToKafka(rowChange,GmallConstants.GMALL_ORDER_INFO_TOPIC);
+        }else if("order_detail".equals(tableName) && CanalEntry.EventType.INSERT.equals(eventType)){
+            sendToKafka(rowChange,GmallConstants.GMALL_ORDER_DETAIL_TOPIC);
+        }else if("user_info".equals(tableName) && (CanalEntry.EventType.INSERT.equals(eventType) || CanalEntry.EventType.UPDATE.equals(eventType) )){
+            sendToKafka(rowChange,GmallConstants.GMALL_USER_INFO_TOPIC);
+        }
+    }
 
-                JSONObject jsonObject = new JSONObject();
-
-                for (CanalEntry.Column column : rowData.getAfterColumnsList()) {
-
-                    jsonObject.put(column.getName(), column.getValue());
-
-                }
-
-                System.out.println(jsonObject.toString());
-                KafkaSender.send(GmallConstants.GMALL_ORDER_INFO_TOPIC, jsonObject.toString());
-
+    private static void sendToKafka(CanalEntry.RowChange rowChange,String topic) {
+        for (CanalEntry.RowData rowData : rowChange.getRowDatasList()) {
+            JSONObject jsonObject = new JSONObject();
+            for (CanalEntry.Column column : rowData.getAfterColumnsList()) {
+                jsonObject.put(column.getName(), column.getValue());
             }
+            System.out.println(jsonObject.toString());
+            //发送至Kafka
+            System.out.println(jsonObject.toString());
+            try {
+                Thread.sleep(new Random().nextInt(3) * 1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            KafkaSender.send(topic, jsonObject.toString());
         }
     }
 }

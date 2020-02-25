@@ -97,7 +97,12 @@ object SaleDetailApp {
 
       jedisClient.close()
       list.toIterator
-    })
+    }).print()
+
+
+    //启动
+    ssc.start()
+    ssc.awaitTermination()
 
 
   }
