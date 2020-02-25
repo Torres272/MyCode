@@ -5,7 +5,7 @@ import java.util.Date
 
 import com.alibaba.fastjson.JSON
 import com.torres.bean.{CouponAlertInfo, EventLog, GmallConstants}
-import com.torres.util.MyKafkaUtil
+import com.torres.util.{MyEsUtil, MyKafkaUtil}
 import org.apache.spark.SparkConf
 import org.apache.spark.streaming.dstream.{DStream, InputDStream}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
@@ -70,7 +70,23 @@ object AlterApp {
       (uids.size() >= 3 && flag, CouponAlertInfo(mid, uids, itemIds, events, System.currentTimeMillis()))
     }
     IsAlterInfoDStream.filter(_._1).map(_._2).print()
+    
+    val alterDStream: DStream[CouponAlertInfo] = IsAlterInfoDStream.filter(_._1 ).map(_._2) 
+    //转换数据结构
+    val minToAlterInfoDStream: DStream[(String, CouponAlertInfo)] = alterDStream.map(log => {
+      val ts: Long = log.ts
+      val min: Long = ts / 1000 / 60
+      (log.mid + min.toString, log)
+    })
 
+    //写入到ES中
+    minToAlterInfoDStream.foreachRDD(rdd=>{
+      rdd.foreachPartition(iter=>{
+        MyEsUtil.insertBulk(GmallConstants.GMALL_ALERT_INFO_INDEX,iter.toList)
+      })
+    })
+  
+    
     ssc.start()
     ssc.awaitTermination()
 
