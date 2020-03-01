@@ -11,7 +11,7 @@ object WordCountBounded {
     val fileDS: DataStream[String] = env.readTextFile("input/word.txt")
     val wordDS: DataStream[String] = fileDS.flatMap(_.split(" "))
 
-    //wordCount
+    //TODO wordCount
     val wordToOneDS: DataStream[(String, Int)] = wordDS.map((_,1))
     wordToOneDS.keyBy(0).sum(1).print()
 
