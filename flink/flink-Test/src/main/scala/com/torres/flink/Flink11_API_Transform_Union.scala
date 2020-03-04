@@ -1,9 +1,8 @@
-package com.torres.transform
+package com.torres.flink
 
 import org.apache.flink.streaming.api.scala._
 
-
-object unionSink {
+object Flink11_API_Transform_Union {
     def main(args: Array[String]): Unit = {
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
 

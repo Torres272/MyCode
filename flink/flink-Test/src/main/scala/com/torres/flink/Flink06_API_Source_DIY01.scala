@@ -1,4 +1,4 @@
-package com.torres.source
+package com.torres.flink
 
 import java.util.Random
 

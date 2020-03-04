@@ -1,4 +1,4 @@
-package com.torres.window
+package com.torres.flink
 
 import org.apache.flink.api.common.functions.AggregateFunction
 import org.apache.flink.streaming.api.scala._

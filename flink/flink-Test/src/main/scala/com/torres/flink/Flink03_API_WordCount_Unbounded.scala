@@ -1,8 +1,8 @@
-package com.torres.wordcount
+package com.torres.flink
 
 import org.apache.flink.streaming.api.scala._
 
-object WordCountUnbounded {
+object Flink03_API_WordCount_Unbounded {
   def main(args: Array[String]): Unit = {
     //构建环境
     val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment

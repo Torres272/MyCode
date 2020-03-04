@@ -1,10 +1,10 @@
-package com.torres.sink
+package com.torres.flink
 
 import org.apache.flink.api.common.serialization.SimpleStringSchema
 import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
 import org.apache.flink.streaming.connectors.kafka.FlinkKafkaProducer011
 
-object KafkaSink {
+object Flink15_API_Sink_Kafka {
     def main(args: Array[String]): Unit = {
 
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment

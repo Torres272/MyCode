@@ -1,8 +1,9 @@
-package com.torres.window
+package com.torres.flink
 
-import org.apache.flink.streaming.api.scala._
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.windowing.time.Time
 
-object flin03countWindow01 {
+object Flink21_API_Window_Time02 {
     def main(args: Array[String]): Unit = {
         //构建环境
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
@@ -18,7 +19,7 @@ object flin03countWindow01 {
         //wordCount
         val value: DataStream[(String, Int)] = wordDS.map((_, 1))
           .keyBy(0)
-          .countWindow(3)
+          .timeWindow(Time.seconds(5),Time.seconds(2))
           .reduce((x, y) => {
               println(System.currentTimeMillis()-time1)
               (x._1, x._2 + y._2)

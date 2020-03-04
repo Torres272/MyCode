@@ -1,5 +1,4 @@
-package com.torres.window
-
+package com.torres.flink
 
 import org.apache.flink.streaming.api.scala.function.ProcessWindowFunction
 import org.apache.flink.streaming.api.scala.{StreamExecutionEnvironment, _}

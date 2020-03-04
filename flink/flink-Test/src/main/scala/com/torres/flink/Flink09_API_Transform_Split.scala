@@ -1,10 +1,8 @@
-package com.torres.transform
-
+package com.torres.flink
 
 import org.apache.flink.streaming.api.scala._
 
-
-object reduceSink {
+object Flink09_API_Transform_Split {
     def main(args: Array[String]): Unit = {
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
         val dataDS: DataStream[String] = env.readTextFile("input/word.txt")
@@ -12,9 +10,14 @@ object reduceSink {
         dataDS
           .flatMap(_.split(" "))
           .map((_, 1)).keyBy(0)
-          .reduce((x, y) => {
-              (x._1, x._2 + y._2)
+          .split(x => {
+              if (x._1.size >= 3) {
+                  List("big","long")
+              } else {
+                  Seq("small")
+              }
           })
+          .select("long")
           .print()
 
         //dataDS.print()

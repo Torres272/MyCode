@@ -1,19 +1,17 @@
-package com.torres.transform
+package com.torres.flink
 
 import org.apache.flink.streaming.api.scala._
 
-
-object aggregationSink {
+object Flink10_API_Transform_Connect {
     def main(args: Array[String]): Unit = {
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
+        //Todo connect的用法，最后需要变换成相同的结构才能打印
         val dataDS: DataStream[(String,Int)] = env.fromCollection(List(("a",1),("b",2),("a",4),("b",3)))
+        val dataDS1: DataStream[Int] = env.fromCollection(List(1,2,3,4))
 
-        //TODO 流的形式，每条求最大值，每条求和
-        dataDS
-          .keyBy(_._1)
-          .sum(1)
-          //.max(1)
-          .print()
+        val conn: ConnectedStreams[(String, Int), Int] = dataDS.connect(dataDS1)
+        conn.map(x=>x,y=>("y",y)).print()
+
 
         //dataDS.print()
         env.execute()

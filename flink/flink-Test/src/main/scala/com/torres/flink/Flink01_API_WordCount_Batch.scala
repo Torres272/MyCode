@@ -1,9 +1,8 @@
-package com.torres.wordcount
+package com.torres.flink
 
-import org.apache.flink.api.scala._
+import org.apache.flink.api.scala.{AggregateDataSet, DataSet, ExecutionEnvironment}
 
-
-object WordCountBatch {
+object Flink01_API_WordCount_Batch {
   def main(args: Array[String]): Unit = {
     //创建运行环境
     val env: ExecutionEnvironment = ExecutionEnvironment.getExecutionEnvironment

@@ -1,3 +1,3 @@
 Manifest-Version: 1.0
-Main-Class: com.torres.wordcount.WordCountUnbounded
+Main-Class: com.torres.wordcount.Flink03_API_WordCount_Unbounded
 
