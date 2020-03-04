@@ -1,6 +1,6 @@
 package com.torres.flink
 
-import org.apache.flink.api.scala.{AggregateDataSet, DataSet, ExecutionEnvironment}
+import org.apache.flink.api.scala.{AggregateDataSet, DataSet, ExecutionEnvironment, _}
 
 object Flink01_API_WordCount_Batch {
   def main(args: Array[String]): Unit = {

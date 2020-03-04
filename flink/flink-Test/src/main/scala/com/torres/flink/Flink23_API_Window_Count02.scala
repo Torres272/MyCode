@@ -1,5 +1,7 @@
 package com.torres.flink
 
+import org.apache.flink.streaming.api.scala._
+
 object Flink23_API_Window_Count02 {
     def main(args: Array[String]): Unit = {
         //构建环境

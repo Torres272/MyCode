@@ -1,6 +1,6 @@
 package com.torres.flink
 
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment, _}
 
 object Flink02_API_WordCount_Bounded {
   def main(args: Array[String]): Unit = {

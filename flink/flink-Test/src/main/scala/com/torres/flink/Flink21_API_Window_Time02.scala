@@ -1,6 +1,6 @@
 package com.torres.flink
 
-import org.apache.flink.streaming.api.scala.{DataStream, StreamExecutionEnvironment}
+import org.apache.flink.streaming.api.scala._
 import org.apache.flink.streaming.api.windowing.time.Time
 
 object Flink21_API_Window_Time02 {
