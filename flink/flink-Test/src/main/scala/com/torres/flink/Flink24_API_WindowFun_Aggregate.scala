@@ -3,7 +3,7 @@ package com.torres.flink
 import org.apache.flink.api.common.functions.AggregateFunction
 import org.apache.flink.streaming.api.scala._
 
-object flin05aggregateWindow01 {
+object Flink24_API_WindowFun_Aggregate {
     def main(args: Array[String]): Unit = {
         //构建环境
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment

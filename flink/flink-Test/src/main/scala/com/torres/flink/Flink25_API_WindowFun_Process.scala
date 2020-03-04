@@ -7,7 +7,7 @@ import org.apache.flink.streaming.api.windowing.windows.TimeWindow
 import org.apache.flink.util.Collector
 
 
-object flin06processWindow01 {
+object Flink25_API_WindowFun_Process {
     def main(args: Array[String]): Unit = {
         //构建环境
         val env: StreamExecutionEnvironment = StreamExecutionEnvironment.getExecutionEnvironment
