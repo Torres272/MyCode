@@ -32,7 +32,6 @@ object Flink35_API_WaterMark_Periodic {
             WaterSensor(data(0), data(1).toLong, data(2).toDouble)
         })
 
-
         //抽取时间戳和设定waterMark
         val markDS: DataStream[WaterSensor] = sensorDS.assignTimestampsAndWatermarks(
 //            new BoundedOutOfOrdernessTimestampExtractor[WaterSensor](Time.seconds(3)) {
@@ -45,7 +44,7 @@ object Flink35_API_WaterMark_Periodic {
             new AssignerWithPeriodicWatermarks[WaterSensor] {
                 private var currentTS = 0L
                 override def getCurrentWatermark: Watermark = {
-                    println("getCurrentWaterMark")
+                    println("getCurrentWaterMark"+System.currentTimeMillis())
                     new Watermark(currentTS - 2000L)
                 }
 

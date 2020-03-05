@@ -47,7 +47,7 @@ object Flink36_API_WaterMark_Punctuated {
 
                 override def checkAndGetNextWatermark
                 (lastElement: WaterSensor, extractedTimestamp: Long): Watermark = {
-                    println("watermark")
+                    println("watermark" + new Watermark(currentTS).getTimestamp)
                     new Watermark(currentTS)
                 }
 
@@ -68,6 +68,7 @@ object Flink36_API_WaterMark_Punctuated {
         //apply方法
         val applyDS: DataStream[String] = windowDS.apply((key: String, window: TimeWindow, datas: Iterable[WaterSensor], out: Collector[String]) => {
             //val sdf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss")
+            println(window.maxTimestamp())
             out.collect(s"${window.getStart}-${window.getEnd}--数据：${datas.toList.toString()}")
         })
 
