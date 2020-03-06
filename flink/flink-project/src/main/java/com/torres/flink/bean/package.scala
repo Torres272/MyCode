@@ -16,4 +16,16 @@ package object bean {
                              windowEndTime: Long
                            )
 
+    case class ApacheLog(
+                        ip:String,
+                        userId:String,
+                        eventTime:Long,
+                        method:String,
+                        url:String
+                        )
+
+    case class HotResourceClick(
+                                 url:String,
+                                 clickCount:Long,
+                                 windowEndTime:Long)
 }
